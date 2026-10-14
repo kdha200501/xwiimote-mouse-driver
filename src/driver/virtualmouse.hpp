@@ -49,6 +49,13 @@ struct VirtualMouse {
         dev = libevdev_new();
 
         libevdev_set_name(dev, "Wiimote-Mouse Virtual Pointer");
+        // Give the device stable USB ids (057e:0f00, an unclaimed id) so keyd
+        // can exclude exactly this device via `-057e:0f00` in its [ids] section.
+        // Without this, keyd with wildcard [*] grabs the virtual pointer and
+        // drops its absolute position events, so the cursor stops moving.
+        libevdev_set_id_bustype(dev, BUS_USB);
+        libevdev_set_id_vendor(dev, 0x057e);
+        libevdev_set_id_product(dev, 0x0f00);
         libevdev_set_id_version(dev, 0x3);
 
         libevdev_enable_property(dev, INPUT_PROP_POINTER);
