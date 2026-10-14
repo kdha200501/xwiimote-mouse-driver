@@ -44,6 +44,7 @@ ExternalProject_Add(
     URL_HASH SHA256=818477fae6eb29b9daacef71a3d0c494de9e48f6fd267a7fc5a4c332db211bc5
     CMAKE_ARGS 
         "-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/sockpp-install"
+        "-DCMAKE_INSTALL_LIBDIR=lib"
         -DSOCKPP_BUILD_STATIC=true
         -DSOCKPP_BUILD_SHARED=false
 )
